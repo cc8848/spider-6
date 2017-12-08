@@ -10,9 +10,9 @@ public class DBUtil {
     public static Connection getCon(){
         Connection con = null;
         String driver = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://139.199.207.90:3306/onlineStore?useUnicode=true&characterEncoding=utf8";
+        String url = "jdbc:mysql://localhost:3306/onlineStore?useUnicode=true&characterEncoding=utf8";
         String user = "root";
-        String password = "rootadmin";
+        String password = "123456";
 
         try {
             Class.forName(driver);

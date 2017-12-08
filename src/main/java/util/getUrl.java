@@ -23,18 +23,26 @@ public class getUrl {
         urlQueue href = new urlQueue();
         urlQueue name = new urlQueue();
         urlQueue all = new urlQueue();
-        urlQueue err = new urlQueue();
+        urlQueue errUrl = new urlQueue();
+        urlQueue errClassName = new urlQueue();
         Document doc = null;
         try {
             doc = conn.data("query", "Java")
                     .userAgent("Mozilla").cookie("auth", "token")
-                    .timeout(10000).post();
+                    .timeout(3000).post();
         } catch (IOException e) {
             e.printStackTrace();
-            err.push("err");
-            map.put("err",err);
-            System.out.println("error:"+url);
-            return map;
+            try {
+                doc = Jsoup.connect(url).timeout(3000).get();
+            }catch (IOException e1){
+                e1.printStackTrace();
+                errUrl.push(url);
+                errClassName.push(className);
+                map.put("errUrl",errUrl);
+                map.put("errClassName",errClassName);
+                System.out.println("error:"+url);
+                return map;
+            }
         }
 
 

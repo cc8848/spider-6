@@ -5,7 +5,7 @@ package util;
  */
 public class urlQueue {
     private int size = 0;
-    private int LENGTH = 1500000;
+    private int LENGTH = 40;
     private Object[] elementData;
     private int header = 0;
 
@@ -22,8 +22,16 @@ public class urlQueue {
     }
 
     public void push(Object data){
+        if (size == LENGTH - 1) {                                          //当数组存满又有数据进来时，创建一个新数组长度是原来的15倍
+            Object[] temp = new Object[LENGTH];
+            System.arraycopy(elementData,0,temp,0,LENGTH);
+            LENGTH = LENGTH * 15;
+            elementData = new Object[LENGTH];
+            System.arraycopy(temp,0,elementData,0,LENGTH/15);
+        }
         elementData[size] = data;
         size ++;
+
     }
 
     public Object pop(){

@@ -14,10 +14,8 @@ import java.sql.SQLException;
  */
 public class AreaDaoImpl implements AreaDao {
 
-    public boolean insertArea(Area area){
+    public boolean insertArea(Area area,Connection con,PreparedStatement pstmt){
         String sql = "insert into area(area_id, name) values(?, ?)";
-        Connection con = DBUtil.getCon();
-        PreparedStatement pstmt = null;
 
         try {
             pstmt = con.prepareStatement(sql);
@@ -28,8 +26,6 @@ public class AreaDaoImpl implements AreaDao {
         } catch (SQLException var1) {
             var1.printStackTrace();
             return false;
-        } finally {
-            DBUtil.allClose(con, pstmt, (ResultSet)null);
         }
     }
 
