@@ -7,7 +7,6 @@ import util.DBUtil;
 import util.FileUtil;
 import util.getUrl;
 import util.urlQueue;
-
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -100,14 +99,14 @@ public class AreaController {
         if (!errClassName.isEmpty()) {
             try {
                 File file = new File("C:\\Users\\YangXuhui\\Desktop\\err.txt");
+                String filePath = "C:\\Users\\YangXuhui\\Desktop\\err.txt";
                 if (FileUtil.createFile(file)) {
                     for (int n = 0, len = errClassName.getLength(); n < len; n++) {
-                        String allErr = "";
-                        String errMsg = errUrl.pop() + " " + errClassName.pop() + "FGX";
-                        allErr += errMsg;
-                        if (n == len - 1) {
-                            FileUtil.writeTxtFile(allErr,file);
-                        }
+                        String urls = errUrl.pop() + " ";
+                        String classnames = errClassName.pop() + "FGX";
+                        FileUtil.contentToTxt(filePath,urls);
+                        FileUtil.contentToTxt(filePath,classnames);
+
                     }
 
                 }
@@ -129,7 +128,7 @@ public class AreaController {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        int times = 10;
+
         urlQueue nextUrlQue = new urlQueue();
         urlQueue errUrl = new urlQueue();
         urlQueue errClassName = new urlQueue();
@@ -142,7 +141,7 @@ public class AreaController {
         String nextClassName;
         Connection con = DBUtil.getCon();
         PreparedStatement pstmt = null;
-        Map<String, Object> map = getUrl.getUrlByClass(url, handdleClassName);
+        Map<String, Object> map = getUrl.getUrlByClass(handdleClassName,url);
         if (map.containsKey("name")) {
             urlQueue name = (urlQueue) map.get("name");
             urlQueue href = (urlQueue) map.get("href");

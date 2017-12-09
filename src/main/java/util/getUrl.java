@@ -1,11 +1,9 @@
 package util;
 
 import org.jsoup.Connection;
-import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,17 +29,17 @@ public class getUrl {
                     .userAgent("Mozilla").cookie("auth", "token")
                     .timeout(3000).post();
         } catch (IOException e) {
-            e.printStackTrace();
             try {
                 doc = Jsoup.connect(url).timeout(3000).get();
             }catch (IOException e1){
-                e1.printStackTrace();
-                errUrl.push(url);
-                errClassName.push(className);
-                map.put("errUrl",errUrl);
-                map.put("errClassName",errClassName);
-                System.out.println("error:"+url);
-                return map;
+                if (url != null && className!= null){
+                    errUrl.push(url);
+                    errClassName.push(className);
+                    map.put("errUrl",errUrl);
+                    map.put("errClassName",errClassName);
+                    System.out.println("error:"+url);
+                    return map;
+                }
             }
         }
 
