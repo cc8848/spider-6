@@ -13,6 +13,13 @@ import java.util.Map;
  */
 public class getUrl {
 
+    /**
+     * @param url
+     * 待连接的地址
+     * @param className
+     * 需要匹配信息的标签class
+     * @return 存储队列的map
+     * */
     public static Map<String, Object> getUrlByClass(String className, String url) {
         String userAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36";
         Connection conn = Jsoup.connect(url);
@@ -43,12 +50,8 @@ public class getUrl {
             }
         }
 
-
         Elements targets = doc.select("." + className + " a");
         int len = targets.size();
-
-
-
 
         if (targets.size() != 0 ) {
             for (int i = 0; i < len; i++) {

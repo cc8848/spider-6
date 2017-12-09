@@ -22,6 +22,13 @@ public class AreaController {
     private String[] className = {"provincetr", "citytr", "countytr", "towntr", "villagetr"};
     private boolean flag = false;
 
+    /**
+     * @param url
+     * 待访问连接
+     * @param arrIndex
+     * 标签class数组的下标
+     * @return boolean
+     * */
     public boolean savaArea(urlQueue url, int arrIndex) {
         String areaId;
         String areaName;
@@ -93,9 +100,7 @@ public class AreaController {
 
         DBUtil.allClose(con, pstmt, null);
 
-        /**
-         * 把爬取失败的url存入txt待处理
-         * */
+        //把访问失败的url写入txt文件，待处理
         if (!errClassName.isEmpty()) {
             try {
                 File file = new File("C:\\Users\\YangXuhui\\Desktop\\err.txt");
@@ -118,6 +123,13 @@ public class AreaController {
         return flag;
     }
 
+    /**
+     * @param url
+     * 待处理的访问失败链接
+     * @param handdleClassName
+     * 待处理链接的标签class
+     * @return boolean
+     * */
     public boolean handdleErr(String url, String handdleClassName) {
         System.out.println("-------------------------------------------------------------------------------------------------------");
         System.out.println("------------------------------------------处理访问失败URL----------------------------------------------");

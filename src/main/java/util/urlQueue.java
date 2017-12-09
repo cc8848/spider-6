@@ -22,13 +22,13 @@ public class urlQueue {
     }
 
     public void push(Object data){
-        if (size == LENGTH - 1) {                                          //当数组存满又有数据进来时，创建一个新数组长度是原来的15倍
+        //当数组存满又有数据push时，将数组长度扩大到15倍
+        if (size == LENGTH - 1) {
             Object[] temp = new Object[LENGTH];
             System.arraycopy(elementData,0,temp,0,LENGTH);
             LENGTH = LENGTH * 15;
             elementData = new Object[LENGTH];
             System.arraycopy(temp,0,elementData,0,LENGTH/15);
-            temp = null;
         }
         elementData[size] = data;
         size ++;
@@ -48,11 +48,7 @@ public class urlQueue {
     }
 
     public boolean isEmpty(){
-        if (size == 0){
-            return true;
-        }else {
-            return false;
-        }
+        return size == 0;
     }
 
     public Object offer(){

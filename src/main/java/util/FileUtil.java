@@ -10,7 +10,8 @@ public class FileUtil {
     /**
      * 创建文件
      * @param fileName
-     * @return
+     * File实例
+     * @return boolean
      */
     public static boolean createFile(File fileName)throws Exception{
         try{
@@ -28,7 +29,8 @@ public class FileUtil {
     /**
      * 读TXT文件内容
      * @param fileName
-     * @return
+     * File实例
+     * @return result
      */
     public static String readTxtFile(File fileName)throws Exception{
         String result=null;
@@ -59,6 +61,13 @@ public class FileUtil {
     }
 
 
+    /**
+     * @param content
+     * 需要写入的字符串
+     * @param fileName
+     * File实例
+     * @return boolean
+     * */
     public static boolean writeTxtFile(String content,File  fileName)throws Exception{
         RandomAccessFile mm=null;
         boolean flag=false;
@@ -67,8 +76,6 @@ public class FileUtil {
             o = new FileOutputStream(fileName);
             o.write(content.getBytes("UTF8"));
             o.close();
-//   mm=new RandomAccessFile(fileName,"rw");
-//   mm.writeBytes(content);
             flag=true;
         } catch (Exception e) {
             // TODO: handle exception
@@ -81,8 +88,12 @@ public class FileUtil {
         return flag;
     }
 
-
-
+    /**
+     * @param content
+     * 需要拼接的字符串
+     * @param filePath
+     * 文件路径
+     * */
     public static void contentToTxt(String filePath, String content) {
         String str = new String(); //原有txt内容
         String s1 = new String();//内容更新
