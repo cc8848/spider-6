@@ -28,6 +28,7 @@ public class urlQueue {
             LENGTH = LENGTH * 15;
             elementData = new Object[LENGTH];
             System.arraycopy(temp,0,elementData,0,LENGTH/15);
+            temp = null;
         }
         elementData[size] = data;
         size ++;

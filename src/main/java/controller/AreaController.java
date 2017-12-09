@@ -20,8 +20,8 @@ import java.util.Map;
 public class AreaController {
     private AreaService areaService = new AreaserviceImpl();
     private final int ID_LENGTH = 12;
-    String[] className = {"provincetr", "citytr", "countytr", "towntr", "villagetr"};
-    boolean flag = false;
+    private String[] className = {"provincetr", "citytr", "countytr", "towntr", "villagetr"};
+    private boolean flag = false;
 
     public boolean savaArea(urlQueue url, int arrIndex) {
         String areaId;
@@ -87,6 +87,8 @@ public class AreaController {
             if (!nextUrlQue.isEmpty()) {
                 arrIndex++;
                 savaArea(nextUrlQue, arrIndex);
+            } else {
+                break;
             }
         }
 
@@ -100,9 +102,14 @@ public class AreaController {
                 File file = new File("C:\\Users\\YangXuhui\\Desktop\\err.txt");
                 if (FileUtil.createFile(file)) {
                     for (int n = 0, len = errClassName.getLength(); n < len; n++) {
+                        String allErr = "";
                         String errMsg = errUrl.pop() + " " + errClassName.pop() + "FGX";
-                        FileUtil.writeTxtFile(errMsg, file);
+                        allErr += errMsg;
+                        if (n == len - 1) {
+                            FileUtil.writeTxtFile(allErr,file);
+                        }
                     }
+
                 }
             } catch (java.lang.Exception e) {
                 e.printStackTrace();
